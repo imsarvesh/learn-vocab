@@ -1,12 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { BrandMark } from "./BrandMark";
 
 describe("BrandMark", () => {
   it("shows Spell Quest with the logo", () => {
-    render(<BrandMark />);
-    expect(screen.getByRole("img", { name: /spell quest/i })).toBeInTheDocument();
-    expect(screen.getByText("Spell Quest")).toBeInTheDocument();
+    const { getByRole, getByText } = render(<BrandMark />);
+    expect(getByRole("img", { name: /spell quest/i })).toBeTruthy();
+    expect(getByText("Spell Quest")).toBeTruthy();
   });
 
   it("supports compact styling", () => {

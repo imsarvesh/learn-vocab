@@ -1,0 +1,549 @@
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(244, 162, 89, 0.35), transparent 36%),
+    radial-gradient(circle at 88% 12%, rgba(15, 139, 141, 0.28), transparent 34%),
+    radial-gradient(circle at 70% 88%, rgba(239, 93, 96, 0.18), transparent 40%),
+    linear-gradient(160deg, #fff4e6 0%, #e8f6f4 48%, #ffe8e1 100%);
+}
+
+.glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(8px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: drift 12s ease-in-out infinite;
+}
+
+.glow-a {
+  width: 180px;
+  height: 180px;
+  background: #f4a259;
+  top: 8%;
+  left: -40px;
+}
+
+.glow-b {
+  width: 220px;
+  height: 220px;
+  background: #0f8b8d;
+  right: -60px;
+  bottom: 12%;
+  animation-delay: -4s;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(18px) scale(1.05);
+  }
+}
+
+.app-main {
+  position: relative;
+  z-index: 1;
+  width: min(560px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2.5rem 0 3rem;
+}
+
+.panel {
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(22, 50, 79, 0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.75rem 1.5rem 1.5rem;
+  animation: rise 420ms ease-out;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brand {
+  margin: 0 0 0.35rem;
+  color: var(--teal-deep);
+  font-size: 1.35rem;
+}
+
+.brand.compact {
+  font-size: 1.1rem;
+  margin-bottom: 0.15rem;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.9rem, 5vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.lede {
+  margin: 0 0 1.25rem;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.home-header,
+.practice-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.points-chip {
+  min-width: 84px;
+  text-align: center;
+  background: linear-gradient(160deg, var(--sun), #ffd08a);
+  color: #5a3208;
+  border-radius: 20px;
+  padding: 0.65rem 0.75rem;
+  box-shadow: 0 8px 18px rgba(244, 162, 89, 0.35);
+}
+
+.points-chip span {
+  display: block;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.points-chip small {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.action-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stack {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field span {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 2px solid rgba(22, 50, 79, 0.12);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  color: var(--ink);
+}
+
+input:focus,
+textarea:focus {
+  outline: 3px solid rgba(15, 139, 141, 0.28);
+  border-color: var(--teal);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.2rem;
+  font-size: 1.05rem;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  background: linear-gradient(160deg, var(--teal), var(--mint));
+  color: white;
+  box-shadow: 0 10px 22px rgba(15, 139, 141, 0.28);
+}
+
+.btn.secondary {
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid rgba(22, 50, 79, 0.12);
+}
+
+.btn.ghost {
+  background: rgba(15, 139, 141, 0.1);
+  color: var(--teal-deep);
+}
+
+.linkish {
+  background: none;
+  border: none;
+  color: var(--teal-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.banner {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: rgba(22, 50, 79, 0.06);
+}
+
+.banner.error,
+.banner.warn {
+  background: rgba(239, 93, 96, 0.12);
+  color: #8d2d30;
+}
+
+.banner.success {
+  background: rgba(42, 157, 143, 0.16);
+  color: #145c54;
+}
+
+.preview {
+  margin: 0.75rem 0;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: rgba(15, 139, 141, 0.08);
+}
+
+.preview ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+}
+
+.rank-list {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.rank-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 2px solid transparent;
+}
+
+.rank-list li.you {
+  border-color: rgba(15, 139, 141, 0.45);
+  background: rgba(15, 139, 141, 0.1);
+}
+
+.rank {
+  color: var(--coral);
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.15rem;
+}
+
+.score {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.25rem;
+  color: var(--teal-deep);
+}
+
+.mode-tag {
+  display: inline-block;
+  margin: 0 0 0.85rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(239, 93, 96, 0.12);
+  color: #9b3033;
+  font-size: 0.85rem;
+}
+
+.prompt-card {
+  margin-bottom: 1rem;
+  padding: 1.2rem;
+  border-radius: 22px;
+  background: linear-gradient(160deg, rgba(15, 139, 141, 0.12), rgba(244, 162, 89, 0.16));
+}
+
+.label {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.prompt-text {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1.15;
+}
+
+.prompt-text.scramble {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hint-clue {
+  margin: 0.65rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.spelling-hint {
+  margin: 0;
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--teal-deep);
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+}
+
+.hint-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.feedback-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.feedback-row .banner {
+  flex: 1;
+}
+
+.speak-btn {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: none;
+  border-radius: 999px;
+  background: rgba(15, 139, 141, 0.16);
+  color: var(--teal-deep);
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.speak-btn:hover {
+  background: rgba(15, 139, 141, 0.28);
+  transform: scale(1.05);
+}
+
+.speak-btn:active {
+  transform: scale(0.96);
+}
+
+.meta {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.month-label {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.month-nav .btn.ghost {
+  min-width: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.cal-weekdays,
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+.cal-weekdays {
+  margin-bottom: 0.35rem;
+}
+
+.cal-weekdays span {
+  text-align: center;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.cal-cell {
+  min-height: 3.4rem;
+  border-radius: 14px;
+  border: 1px solid rgba(22, 50, 79, 0.08);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.35rem 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.cal-cell.muted {
+  background: transparent;
+  border-color: transparent;
+}
+
+.cal-cell.today {
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 1px rgba(15, 139, 141, 0.35);
+}
+
+.cal-cell.has-points {
+  background: linear-gradient(
+    160deg,
+    rgba(15, 139, 141, 0.14),
+    rgba(255, 255, 255, 0.7)
+  );
+}
+
+.cal-day {
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.cal-pts {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--teal-deep);
+}
+
+.cal-pts.empty {
+  color: rgba(22, 50, 79, 0.28);
+  font-family: inherit;
+  font-size: 0.7rem;
+}
+
+.month-total {
+  margin: 0.9rem 0 1rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.daily-points .btn.secondary {
+  width: 100%;
+}
+
+.btn.danger {
+  background: linear-gradient(160deg, var(--coral), #f28b8d);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(239, 93, 96, 0.28);
+}
+
+.settings-block {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(22, 50, 79, 0.08);
+}
+
+.settings-block h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.settings-block .meta {
+  margin-bottom: 0.75rem;
+}
+
+.confirm-copy {
+  margin: 0 0 0.65rem;
+  color: var(--ink);
+}
+
+.settings .banner {
+  margin-bottom: 1rem;
+}
+
+.settings > .btn.secondary {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    width: min(100% - 1.25rem, 560px);
+    padding-top: 1.5rem;
+  }
+
+  .panel {
+    padding: 1.35rem 1.1rem 1.2rem;
+  }
+
+  .row .btn {
+    flex: 1 1 100%;
+  }
+}

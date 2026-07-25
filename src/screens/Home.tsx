@@ -1,3 +1,5 @@
+import { BrandMark } from "../components/BrandMark";
+
 type HomeProps = {
   nickname: string;
   points: number;
@@ -27,7 +29,7 @@ export function Home({
 }: HomeProps) {
   return (
     <section className="panel home">
-      <p className="brand">Spell Quest</p>
+      <BrandMark />
       <header className="home-header">
         <div>
           <p className="eyebrow">Playing as</p>

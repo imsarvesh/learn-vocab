@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { BrandMark } from "../components/BrandMark";
 import { parseWordCsv } from "../lib/csv";
 import type { WordEntry } from "../types";
 
@@ -32,7 +33,7 @@ export function ImportWords({ onCancel, onSave }: ImportWordsProps) {
 
   return (
     <section className="panel import">
-      <p className="brand">Spell Quest</p>
+      <BrandMark />
       <h1>Import words</h1>
       <p className="lede">{hint}</p>
 

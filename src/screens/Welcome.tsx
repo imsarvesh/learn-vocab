@@ -1,3 +1,5 @@
+import { BrandMark } from "../components/BrandMark";
+
 type WelcomeProps = {
   initialName?: string;
   onStart: (nickname: string) => void;
@@ -6,7 +8,7 @@ type WelcomeProps = {
 export function Welcome({ initialName = "", onStart }: WelcomeProps) {
   return (
     <section className="panel welcome">
-      <p className="brand">Spell Quest</p>
+      <BrandMark />
       <h1>What should we call you?</h1>
       <p className="lede">Pick a nickname for the leaderboard.</p>
       <form

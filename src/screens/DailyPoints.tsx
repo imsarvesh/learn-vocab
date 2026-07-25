@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { BrandMark } from "../components/BrandMark";
 import {
   buildMonthGrid,
   formatDateKey,
@@ -59,7 +60,7 @@ export function DailyPoints({
 
   return (
     <section className="panel daily-points">
-      <p className="brand">Spell Quest</p>
+      <BrandMark />
       <header className="home-header">
         <div>
           <p className="eyebrow">Points by day</p>

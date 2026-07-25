@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { BrandMark } from "../components/BrandMark";
 import {
   formatSpellingHint,
   isCorrect,
@@ -131,7 +132,7 @@ export function Practice({
   if (finished) {
     return (
       <section className="panel practice">
-        <p className="brand">Spell Quest</p>
+        <BrandMark />
         <h1>Round complete!</h1>
         <p className="lede">
           {nickname} earned <strong>{sessionPoints}</strong> points this round.
@@ -148,7 +149,7 @@ export function Practice({
     <section className="panel practice">
       <header className="practice-top">
         <div>
-          <p className="brand compact">Spell Quest</p>
+          <BrandMark compact />
           <p className="meta">
             {nickname} · {totalPoints} pts · Word {index + 1}/{round.length}
           </p>

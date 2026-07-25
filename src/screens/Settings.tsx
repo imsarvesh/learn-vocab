@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrandMark } from "../components/BrandMark";
 
 type ConfirmKind = "points" | "words" | null;
 
@@ -40,7 +41,7 @@ export function Settings({
 
   return (
     <section className="panel settings">
-      <p className="brand">Spell Quest</p>
+      <BrandMark />
       <h1>Settings</h1>
       <p className="lede">Manage your progress on this device.</p>
 

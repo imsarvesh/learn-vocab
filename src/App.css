@@ -547,3 +547,21 @@ textarea {
     flex: 1 1 100%;
   }
 }
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.brand-mark img {
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 0.4rem;
+  flex-shrink: 0;
+}
+
+.brand-mark.compact img {
+  width: 1.25rem;
+  height: 1.25rem;
+}

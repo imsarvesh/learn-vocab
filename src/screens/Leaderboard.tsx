@@ -1,3 +1,4 @@
+import { BrandMark } from "../components/BrandMark";
 import type { LeaderboardEntry } from "../types";
 
 type LeaderboardProps = {
@@ -13,7 +14,7 @@ export function Leaderboard({
 }: LeaderboardProps) {
   return (
     <section className="panel leaderboard">
-      <p className="brand">Spell Quest</p>
+      <BrandMark />
       <h1>Leaderboard</h1>
       <p className="lede">Top spellers on this device.</p>
 

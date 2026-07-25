@@ -215,7 +215,11 @@ export function Practice({
               onChange={(event) => setAnswer(event.target.value)}
               autoFocus
               autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
               spellCheck={false}
+              inputMode="text"
+              enterKeyHint="done"
               placeholder="Type here"
             />
           </label>

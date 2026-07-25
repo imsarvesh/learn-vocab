@@ -1,46 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Spell Quest">
-  <defs>
-    <linearGradient id="tileGlow" x1="18%" y1="12%" x2="78%" y2="88%">
-      <stop offset="0%" stop-color="#0f8b8d"/>
-      <stop offset="55%" stop-color="#0a6a6c"/>
-      <stop offset="100%" stop-color="#085456"/>
-    </linearGradient>
-  </defs>
-  <rect x="0" y="0" width="512" height="512" rx="112" ry="112" fill="url(#tileGlow)"/>
-  <ellipse cx="168" cy="150" rx="140" ry="110" fill="#f4a259" opacity="0.22"/>
-  <!-- Playful S as path (no webfont) -->
-  <g transform="translate(256 268) rotate(-8)">
-    <path
-      fill="#ffffff"
-      d="M 62 -78
-         C 28 -108, -48 -108, -78 -78
-         C -108 -48, -98 -8, -52 8
-         L 18 36
-         C 48 48, 52 68, 28 82
-         C 4 96, -48 92, -72 68
-         C -86 52, -78 42, -58 48
-         C -42 54, -18 66, 8 58
-         C 42 48, 48 22, 18 8
-         L -48 -20
-         C -92 -40, -102 -82, -72 -108
-         C -38 -138, 48 -140, 82 -102
-         C 98 -82, 92 -68, 70 -72
-         C 52 -76, 38 -88, 12 -90
-         C -14 -92, -28 -82, -18 -70
-         C -8 -58, 28 -52, 62 -78
-         Z"
-    />
-  </g>
-  <!-- 4-point spark near top-right of S -->
-  <g transform="translate(348 148)">
-    <path
-      fill="#f4a259"
-      d="M 0 -36 L 10 -10 L 36 0 L 10 10 L 0 36 L -10 10 L -36 0 L -10 -10 Z"
-    />
-    <path
-      fill="#ef5d60"
-      d="M 0 -18 L 5 -5 L 18 0 L 5 5 L 0 18 L -5 5 L -18 0 L -5 -5 Z"
-      opacity="0.95"
-    />
-  </g>
+  <rect width="512" height="512" rx="96" fill="#0a6a6c"/>
+  <path
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="52"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M 338 168
+       C 338 128 174 128 174 178
+       C 174 228 338 236 338 298
+       C 338 360 174 360 174 318"
+  />
 </svg>

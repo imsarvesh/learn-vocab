@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  base: "/learn-vocab/",
   plugins: [
     react(),
     VitePWA({
@@ -23,7 +24,8 @@ export default defineConfig({
         theme_color: "#0a6a6c",
         background_color: "#fff8f0",
         display: "standalone",
-        start_url: "/",
+        start_url: "/learn-vocab/",
+        scope: "/learn-vocab/",
         icons: [
           {
             src: "logo.svg",

@@ -6,7 +6,7 @@ A small React app for kids to practice English spellings with points and a local
 
 - Nickname (no accounts)
 - CSV word import (`word,clue`)
-- **Meaning → Spell** and **Letter Scramble** modes
+- **Letter Scramble** practice mode
 - Points: 10 / 5 / 2 / 0 by attempt
 - Local leaderboard (device only; shared backend later)
 

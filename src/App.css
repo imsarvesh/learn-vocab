@@ -334,6 +334,45 @@ textarea {
   text-transform: uppercase;
 }
 
+.scramble-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0.15rem 0 0.1rem;
+}
+
+.scramble-tile {
+  min-width: 2.35rem;
+  height: 2.6rem;
+  padding: 0 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #fff;
+  border: 2px solid rgba(15, 139, 141, 0.28);
+  box-shadow: 0 6px 14px rgba(15, 139, 141, 0.12);
+  font-family: "Baloo 2", "Nunito", system-ui, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--teal-deep);
+  text-transform: uppercase;
+}
+
+.scramble-gap {
+  width: 0.75rem;
+  height: 1px;
+}
+
+@media (max-width: 480px) {
+  .scramble-tile {
+    min-width: 2.05rem;
+    height: 2.35rem;
+    font-size: 1.25rem;
+  }
+}
+
 .hint-clue {
   margin: 0.65rem 0 0;
   color: var(--ink-soft);
@@ -519,6 +558,11 @@ textarea {
   margin-bottom: 0.75rem;
 }
 
+.settings-block .btn + .btn,
+.settings-block .btn + .confirm-row {
+  margin-top: 0.65rem;
+}
+
 .confirm-copy {
   margin: 0 0 0.65rem;
   color: var(--ink);
@@ -533,6 +577,57 @@ textarea {
   margin-top: 0.25rem;
 }
 
+.letter-boxes {
+  position: relative;
+}
+
+.letter-boxes-input {
+  position: absolute;
+  opacity: 0.01;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.letter-boxes-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.letter-box {
+  width: 2.4rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(22, 50, 79, 0.14);
+  border-radius: 12px;
+  background: #fff;
+  font-family: "Baloo 2", "Nunito", system-ui, sans-serif;
+  font-size: 1.45rem;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.letter-box.active {
+  border-color: var(--teal);
+  outline: 3px solid rgba(15, 139, 141, 0.28);
+}
+
+.letter-box.filled {
+  background: rgba(15, 139, 141, 0.08);
+  border-color: rgba(15, 139, 141, 0.35);
+}
+
+.letter-gap {
+  width: 0.85rem;
+  height: 1px;
+}
+
 @media (max-width: 480px) {
   .app-main {
     width: min(100% - 1.25rem, 560px);
@@ -545,6 +640,12 @@ textarea {
 
   .row .btn {
     flex: 1 1 100%;
+  }
+
+  .letter-box {
+    width: 2.1rem;
+    height: 2.45rem;
+    font-size: 1.25rem;
   }
 }
 

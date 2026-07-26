@@ -14,7 +14,7 @@ import { Leaderboard } from "./screens/Leaderboard";
 import { Practice } from "./screens/Practice";
 import { Settings } from "./screens/Settings";
 import { Welcome } from "./screens/Welcome";
-import type { AppView, PracticeMode, WordEntry } from "./types";
+import type { AppView, WordEntry } from "./types";
 import "./App.css";
 
 const scoreStore = createLocalScoreStore();
@@ -25,7 +25,6 @@ export default function App() {
   );
   const [nickname, setNicknameState] = useState(() => getNickname() ?? "");
   const [wordList, setWordListState] = useState(() => ensureWordList());
-  const [practiceMode, setPracticeMode] = useState<PracticeMode>("meaning");
   const [pointsVersion, setPointsVersion] = useState(0);
 
   const points = useMemo(() => {
@@ -76,11 +75,7 @@ export default function App() {
             hasWords={wordList.words.length > 0}
             wordCount={wordList.words.length}
             listName={wordList.name}
-            onPractice={(mode) => {
-              setPracticeMode(mode);
-              setView("practice");
-            }}
-            onImport={() => setView("import")}
+            onPractice={() => setView("practice")}
             onLeaderboard={() => setView("leaderboard")}
             onDailyPoints={() => setView("daily-points")}
             onSettings={() => setView("settings")}
@@ -90,7 +85,7 @@ export default function App() {
 
         {view === "import" && (
           <ImportWords
-            onCancel={() => setView("home")}
+            onCancel={() => setView("settings")}
             onSave={saveImportedWords}
           />
         )}
@@ -115,6 +110,7 @@ export default function App() {
         {view === "settings" && (
           <Settings
             nickname={nickname}
+            onImport={() => setView("import")}
             onResetPoints={() => {
               scoreStore.resetPoints(nickname);
               setPointsVersion((v) => v + 1);
@@ -128,8 +124,7 @@ export default function App() {
 
         {view === "practice" && (
           <Practice
-            key={`${practiceMode}-${wordList.id}`}
-            mode={practiceMode}
+            key={wordList.id}
             words={wordList.words}
             nickname={nickname}
             totalPoints={points}

@@ -5,6 +5,7 @@ type ConfirmKind = "points" | "words" | null;
 
 type SettingsProps = {
   nickname: string;
+  onImport: () => void;
   onResetPoints: () => void;
   onResetWordList: () => void;
   onBack: () => void;
@@ -12,6 +13,7 @@ type SettingsProps = {
 
 export function Settings({
   nickname,
+  onImport,
   onResetPoints,
   onResetWordList,
   onBack,
@@ -85,8 +87,11 @@ export function Settings({
       <div className="settings-block">
         <h2>Word list</h2>
         <p className="meta">
-          Removes any imported list and restores the built-in starter words.
+          Import a CSV list, or restore the built-in starter words.
         </p>
+        <button type="button" className="btn secondary" onClick={onImport}>
+          Import words
+        </button>
         {confirm === "words" ? (
           <div className="confirm-row">
             <p className="confirm-copy">

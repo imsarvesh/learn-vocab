@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
+  expectedLetterCount,
+  firstLetterOfWord,
   formatSpellingHint,
   isCorrect,
+  isLetterAnswerComplete,
+  lettersOnly,
+  mergeLettersIntoWord,
   normalizeAnswer,
   pickRound,
   pointsForAttempt,
@@ -61,6 +66,20 @@ describe("scrambleWord", () => {
   it("returns single-letter words unchanged", () => {
     expect(scrambleWord("a")).toBe("a");
   });
+
+  it("keeps spaces in place for multi-word answers", () => {
+    let n = 0;
+    const random = () => {
+      const sequence = [0.9, 0.1, 0.8, 0.2, 0.7, 0.3, 0.6, 0.4];
+      return sequence[n++ % sequence.length];
+    };
+    const result = scrambleWord("ice cream", random);
+    expect(result.includes(" ")).toBe(true);
+    expect(result.indexOf(" ")).toBe("ice cream".indexOf(" "));
+    expect([...result].filter((ch) => ch !== " ").sort().join("")).toBe(
+      [... "icecream"].sort().join(""),
+    );
+  });
 });
 
 describe("pickRound", () => {
@@ -72,5 +91,32 @@ describe("pickRound", () => {
     ];
     expect(pickRound(words, 2, () => 0)).toHaveLength(2);
     expect(pickRound(words, 10, () => 0)).toHaveLength(3);
+  });
+});
+
+describe("letter boxes helpers", () => {
+  it("counts letters ignoring spaces", () => {
+    expect(expectedLetterCount("candy")).toBe(5);
+    expect(expectedLetterCount("ice cream")).toBe(8);
+  });
+
+  it("strips non-letters", () => {
+    expect(lettersOnly("C-a!n 2dy")).toBe("Candy");
+  });
+
+  it("merges letters back into the word shape", () => {
+    expect(mergeLettersIntoWord("ice cream", "icecream")).toBe("ice cream");
+    expect(mergeLettersIntoWord("candy", "can")).toBe("can");
+  });
+
+  it("detects completion", () => {
+    expect(isLetterAnswerComplete("candy", "candy")).toBe(true);
+    expect(isLetterAnswerComplete("candy", "cand")).toBe(false);
+    expect(isLetterAnswerComplete("ice cream", "icecream")).toBe(true);
+  });
+
+  it("returns first letter for hint prefill", () => {
+    expect(firstLetterOfWord("candy")).toBe("c");
+    expect(firstLetterOfWord(" ice")).toBe("i");
   });
 });

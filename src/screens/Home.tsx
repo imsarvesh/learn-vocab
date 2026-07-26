@@ -6,8 +6,7 @@ type HomeProps = {
   hasWords: boolean;
   wordCount: number;
   listName: string;
-  onPractice: (mode: "meaning" | "scramble") => void;
-  onImport: () => void;
+  onPractice: () => void;
   onLeaderboard: () => void;
   onDailyPoints: () => void;
   onSettings: () => void;
@@ -21,7 +20,6 @@ export function Home({
   wordCount,
   listName,
   onPractice,
-  onImport,
   onLeaderboard,
   onDailyPoints,
   onSettings,
@@ -43,8 +41,8 @@ export function Home({
 
       <p className="lede">
         {hasWords
-          ? `${wordCount.toLocaleString()} words ready (${listName}). Pick a practice mode.`
-          : "Import a word list to start practicing."}
+          ? `${wordCount.toLocaleString()} words ready (${listName}). Unscramble letters to practice spelling.`
+          : "Open Settings to import a word list and start practicing."}
       </p>
 
       <div className="action-grid">
@@ -52,20 +50,9 @@ export function Home({
           type="button"
           className="btn primary"
           disabled={!hasWords}
-          onClick={() => onPractice("meaning")}
-        >
-          Meaning → Spell
-        </button>
-        <button
-          type="button"
-          className="btn primary"
-          disabled={!hasWords}
-          onClick={() => onPractice("scramble")}
+          onClick={onPractice}
         >
           Letter Scramble
-        </button>
-        <button type="button" className="btn secondary" onClick={onImport}>
-          Import words
         </button>
         <button type="button" className="btn secondary" onClick={onLeaderboard}>
           Leaderboard

@@ -8,7 +8,8 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      // Unregisters any prior SW and skips offline caching; manifest kept for install.
+      selfDestroying: true,
       includeAssets: [
         "favicon.svg",
         "logo.svg",
@@ -20,7 +21,7 @@ export default defineConfig({
         name: "Spell Quest",
         short_name: "Spell Quest",
         description:
-          "Practice spelling with meanings, scrambles, and daily points.",
+          "Practice spelling with letter scrambles and daily points.",
         theme_color: "#0a6a6c",
         background_color: "#fff8f0",
         display: "standalone",
@@ -52,9 +53,6 @@ export default defineConfig({
             purpose: "maskable",
           },
         ],
-      },
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2,csv}"],
       },
     }),
   ],

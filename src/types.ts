@@ -8,8 +8,6 @@ export type LeaderboardEntry = {
   dailyPoints?: Record<string, number>;
 };
 
-export type PracticeMode = "meaning" | "scramble";
-
 export type AppView =
   | "welcome"
   | "home"

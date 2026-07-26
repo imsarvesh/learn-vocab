@@ -1,17 +1,22 @@
 import { useMemo, useState } from "react";
 import { BrandMark } from "../components/BrandMark";
+import { LetterBoxes } from "../components/LetterBoxes";
 import {
+  expectedLetterCount,
+  firstLetterOfWord,
   formatSpellingHint,
   isCorrect,
+  isLetterAnswerComplete,
+  lettersOnly,
+  mergeLettersIntoWord,
   pickRound,
   pointsForAttempt,
   scrambleWord,
 } from "../lib/game";
 import { canSpeak, speakWord } from "../lib/speech";
-import type { PracticeMode, WordEntry } from "../types";
+import type { WordEntry } from "../types";
 
 type PracticeProps = {
-  mode: PracticeMode;
   words: WordEntry[];
   nickname: string;
   totalPoints: number;
@@ -51,7 +56,6 @@ function SpeakerIcon() {
 }
 
 export function Practice({
-  mode,
   words,
   nickname,
   totalPoints,
@@ -67,11 +71,13 @@ export function Practice({
   const [earnedThisWord, setEarnedThisWord] = useState(0);
   const [sessionPoints, setSessionPoints] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
-  const [scrambleMap] = useState(() =>
-    Object.fromEntries(round.map((w) => [w.word, scrambleWord(w.word)])),
+  const scrambles = useMemo(
+    () => round.map((w) => scrambleWord(w.word)),
+    [round],
   );
 
   const current = round[index];
+  const scrambled = scrambles[index] ?? "";
   const finished = phase === "summary";
 
   function finishWord(points: number, feedback: string) {
@@ -101,7 +107,8 @@ export function Practice({
   function checkAnswer() {
     if (!current || phase !== "answering") return;
 
-    if (isCorrect(answer, current.word)) {
+    const shaped = mergeLettersIntoWord(current.word, answer);
+    if (isCorrect(shaped, current.word)) {
       const points = pointsForAttempt(attempt, hintUsed);
       const hintNote = hintUsed ? " (hint used)" : "";
       finishWord(points, `Nice! +${points} points${hintNote}`);
@@ -159,27 +166,22 @@ export function Practice({
         </button>
       </header>
 
-      <p className="mode-tag">
-        {mode === "meaning" ? "Meaning → Spell" : "Letter Scramble"}
-      </p>
+      <p className="mode-tag">Letter Scramble</p>
 
       <div className="prompt-card">
-        {mode === "meaning" ? (
-          <>
-            <p className="label">Clue</p>
-            <p className="prompt-text">{current.clue}</p>
-          </>
-        ) : (
-          <>
-            <p className="label">Unscramble</p>
-            <p className="prompt-text scramble" aria-label="scrambled letters">
-              {scrambleMap[current.word]}
-            </p>
-            {current.clue && (
-              <p className="hint-clue">Hint: {current.clue}</p>
-            )}
-          </>
-        )}
+        <p className="label">Unscramble</p>
+        <div className="scramble-tiles" aria-label="scrambled letters">
+          {[...scrambled].map((ch, i) =>
+            /\s/.test(ch) ? (
+              <span key={`gap-${i}`} className="scramble-gap" aria-hidden="true" />
+            ) : (
+              <span key={`tile-${i}`} className="scramble-tile">
+                {ch}
+              </span>
+            ),
+          )}
+        </div>
+        {current.clue && <p className="hint-clue">Hint: {current.clue}</p>}
         {hintUsed && (
           <div className="hint-row">
             <p className="spelling-hint" aria-live="polite">
@@ -210,17 +212,12 @@ export function Practice({
         >
           <label className="field">
             <span>Type the spelling (try {attempt} of 3)</span>
-            <input
+            <LetterBoxes
+              word={current.word}
               value={answer}
-              onChange={(event) => setAnswer(event.target.value)}
-              autoFocus
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="none"
-              spellCheck={false}
-              inputMode="text"
-              enterKeyHint="done"
-              placeholder="Type here"
+              disabled={phase !== "answering"}
+              onChange={setAnswer}
+              onComplete={() => checkAnswer()}
             />
           </label>
           {message && (
@@ -244,11 +241,25 @@ export function Practice({
               type="button"
               className="btn ghost"
               disabled={hintUsed}
-              onClick={() => setHintUsed(true)}
+              onClick={() => {
+                setHintUsed(true);
+                setAnswer((prev) => {
+                  const letters = lettersOnly(prev);
+                  const first = firstLetterOfWord(current.word);
+                  const rest = letters.slice(1);
+                  return lettersOnly(first + rest)
+                    .toUpperCase()
+                    .slice(0, expectedLetterCount(current.word));
+                });
+              }}
             >
               {hintUsed ? "Hint shown" : "Show hint"}
             </button>
-            <button type="submit" className="btn primary" disabled={!answer.trim()}>
+            <button
+              type="submit"
+              className="btn primary"
+              disabled={!isLetterAnswerComplete(current.word, answer)}
+            >
               Check
             </button>
           </div>
